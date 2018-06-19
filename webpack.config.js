@@ -2,22 +2,22 @@ const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require("clean-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
-    mode: "development",
     entry: './src/js/main.js',
     devtool: 'inline-source-map',
 
     output: {
-        filename: "bundle.js",
-        path: path.resolve(__dirname, "dist"),
-        publicPath: "./"
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '/',
+        filename: 'bundle.js'
     },
-
     devServer: {
-        publicPath: "/",
-        contentBase: './dist'
+        historyApiFallback:{
+            index:'/index.html'
+        },
     },
 
     plugins: [
@@ -30,7 +30,8 @@ module.exports = {
             template: "./src/template.html"
         }),
         new CleanWebpackPlugin(['dist']),
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        new UglifyJsPlugin()
     ],
 
     module: {
@@ -47,5 +48,20 @@ module.exports = {
                 use: 'vue-loader'
             }
         ]
+    },
+
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                cache: true,
+                parallel: true,
+                uglifyOptions: {
+                    compress: false,
+                    ecma: 6,
+                    mangle: true
+                },
+                sourceMap: false
+            })
+        ]
     }
-}
+};

@@ -1,9 +1,9 @@
 <template>
-    <h4>Just home :)</h4>
+    <h3>404 - Page not found</h3>
 </template>
 
 <script>
     export default {
-        name: "Home"
+        name: "PageNotFound"
     }
 </script>
