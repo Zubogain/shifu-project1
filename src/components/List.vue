@@ -30,18 +30,10 @@
         },
         data() {
             return {
-                list: this.initList(),
+                list: this.getList(),
             }
         },
         methods: {
-            initList: function () {
-                const list = this.getList();
-                console.log(list);
-                if(!list) {
-                    localStorage.setItem("list", JSON.stringify(json));
-                }
-                return this.getList();
-            },
             getList: function () {
                 return JSON.parse(localStorage.getItem("list"));
             },
