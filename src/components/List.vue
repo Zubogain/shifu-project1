@@ -20,7 +20,6 @@
 
 <script>
     import ListItem from './ListItem.vue';
-    import json from './../../list.json';
     export default {
         name: "List",
         components: {
@@ -28,7 +27,12 @@
         },
         data() {
             return {
-                list: json,
+                list: this.getList(),
+            }
+        },
+        methods: {
+            getList: function () {
+                return JSON.parse(localStorage.getItem("list"));
             }
         }
     }

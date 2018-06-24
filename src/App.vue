@@ -10,7 +10,7 @@
                 </aside>
             </div>
         </nav>
-        <div class="card-panel grey lighten-5">
+        <div class="card-panel grey lighten-5 row">
             <router-view></router-view>
         </div>
     </main>
