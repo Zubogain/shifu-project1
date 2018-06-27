@@ -1,6 +1,6 @@
 <template>
     <form @submit="validateForm">
-        <input type="text" placeholder="Введите заголовок" v-model="title">
+        <input type="text" placeholder="Введите заголовок" v-model="item.title">
         <input type="submit" value="Добавить" class="col s12 btn">
     </form>
 </template>
@@ -8,16 +8,23 @@
 <script>
     export default {
         name: "InsertItem",
+        props: ['list'],
         data: function () {
             return {
-                title: ''
+                item: {
+                    title: '',
+                    content: '',
+                    slug: '',
+                    id: this.list.length
+                }
             }
         },
         methods: {
             validateForm: function (e) {
                 e.preventDefault();
-                if(this.title.trim() !== '') {
-                    this.$emit('insertItem', this.title.trim());
+                this.item.title = this.item.title.trim();
+                if(this.item.title !== '') {
+                    this.list.push(this.item);
                     this.$router.push('/admin');
                 }
             }

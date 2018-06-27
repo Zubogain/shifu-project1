@@ -11,6 +11,7 @@ Vue.use(Router);
 localStorage.clear();
 
 try {
+    json.forEach((el, index) => el.id = index);
     localStorage.setItem('list', JSON.stringify(json));
 } catch (e) {
     console.log(`${e.name}: ${e.message}`);

@@ -8,7 +8,6 @@
                         <th>Title</th>
                         <th>Content</th>
                         <th>Slug</th>
-                        <th></th>
                     </tr>
                     </thead>
 
@@ -17,14 +16,13 @@
                             v-for="item in list"
                             v-bind:item="item"
                             v-bind:key="item.title"
-                            v-on:remove="removeFromList"
                     ></ListItem>
                     </tbody>
                 </table>
             </article>
             <article v-else>
                 <router-view
-                    v-on:insertItem="insertItemInList"
+                    v-bind:list="list"
                 ></router-view>
             </article>
         </div>
@@ -45,16 +43,11 @@
         methods: {
             getList: function () {
                 return JSON.parse(localStorage.getItem("list"));
-            },
-            removeFromList: function (title) {
-                localStorage.setItem("list", JSON.stringify(this.list.filter(item => item.title !== title)));
-                this.list = this.getList();
-            },
-            insertItemInList: function (title) {
-                const sortedList = this.list.filter(item => item.title !== title);
-                sortedList.push({ title: title, content: '', slug: '' });
-                localStorage.setItem("list", JSON.stringify(sortedList));
-                this.list = this.getList();
+            }
+        },
+        watch: {
+            list: function (val) {
+                localStorage.setItem('list', JSON.stringify(val));
             }
         }
     }
