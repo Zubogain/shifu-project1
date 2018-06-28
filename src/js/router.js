@@ -1,6 +1,7 @@
 import Main from './components/Main.vue';
 import List from './components/List.vue';
 import InsertItem from './components/InsertItem.vue';
+import EditItem from  './components/EditItem.vue';
 import PageNotFound from './components/PageNotFound.vue';
 const routes = [
     {
@@ -17,6 +18,11 @@ const routes = [
                 path: 'add',
                 name: 'insertItem',
                 component: InsertItem
+            },
+            {
+                path: 'edit/:id',
+                name: 'editItem',
+                component: EditItem
             }
         ]
     },
