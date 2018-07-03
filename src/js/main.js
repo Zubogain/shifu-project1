@@ -8,13 +8,15 @@ import InsertItem from '../components/InsertItem.vue';
 import PageNotFound from '../components/PageNotFound.vue';
 import json from '../../list.json';
 Vue.use(Router);
-localStorage.clear();
 
-try {
-    json.forEach((el, index) => el.id = index);
-    localStorage.setItem('list', JSON.stringify(json));
-} catch (e) {
-    console.log(`${e.name}: ${e.message}`);
+const list = localStorage.getItem('list');
+if(!list && typeof list !== "string") {
+    try {
+        json.forEach((el, index) => el.id = index);
+        localStorage.setItem('list', JSON.stringify(json));
+    } catch (e) {
+        console.log(`${e.name}: ${e.message}`);
+    }
 }
 
 const router = new Router({

@@ -8,7 +8,6 @@
                         <th>Title</th>
                         <th>Content</th>
                         <th>Slug</th>
-                        <th></th>
                     </tr>
                     </thead>
 
@@ -16,15 +15,14 @@
                     <ListItem
                             v-for="item in list"
                             v-bind:item="item"
-                            v-bind:list="list"
-                            v-bind:key="item.id"
+                            v-bind:key="item.title"
                     ></ListItem>
                     </tbody>
                 </table>
             </article>
             <article v-else>
                 <router-view
-                        v-bind:list="list"
+                    v-bind:list="list"
                 ></router-view>
             </article>
         </div>
@@ -49,7 +47,6 @@
         },
         watch: {
             list: function (val) {
-                val.forEach((el, index) => el.id = index);
                 localStorage.setItem('list', JSON.stringify(val));
             }
         }
