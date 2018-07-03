@@ -9,7 +9,6 @@
                         <th scope="col">Content</th>
                         <th scope="col">Slug</th>
                         <th scope="col"></th>
-                        <th scope="col"></th>
                     </tr>
                     </thead>
 
@@ -22,11 +21,6 @@
                     ></ListItem>
                     </tbody>
                 </table>
-            </article>
-            <article v-else-if="this.$route.fullPath === '/admin/add'" class="col-12">
-                <router-view
-                    v-bind:list="list"
-                ></router-view>
             </article>
             <article v-else class="col-12">
                 <router-view

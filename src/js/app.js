@@ -5,13 +5,15 @@ import { routes } from './router.js';
 import App from './App.vue';
 import json from '../../list.json';
 Vue.use(VueRouter);
-localStorage.clear();
 
-try {
-    json.forEach((el, index) => el.id = index);
-    localStorage.setItem('list', JSON.stringify(json));
-} catch (e) {
-    console.log(`${e.name}: ${e.message}`);
+const list = localStorage.getItem('list');
+if(!list && typeof list !== "string") {
+    try {
+        json.forEach((el, index) => el.id = index);
+        localStorage.setItem('list', JSON.stringify(json));
+    } catch (e) {
+        console.log(`${e.name}: ${e.message}`);
+    }
 }
 
 const router = new VueRouter({
