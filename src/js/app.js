@@ -6,7 +6,6 @@ import { routes } from './router.js';
 import App from './App.vue';
 Vue.use(VueRouter);
 Vue.use(VueResource);
-localStorage.clear();
 
 const router = new VueRouter({
     mode: "history",
@@ -18,15 +17,18 @@ new Vue({
     el: '#app',
     methods: {
         getAllPosts() {
-            const options = {
-                params: {
-                    _start: 0,
-                    _limit: 10,
-                }
-            };
-            this.$http.get('https://jsonplaceholder.typicode.com/posts', options).then(response => {
-                localStorage.setItem('list', JSON.stringify(response.data));
-            }, error => console.log(error));
+            const list = localStorage.getItem("list");
+            if(!list && typeof list !== "string") {
+                const options = {
+                    params: {
+                        _start: 0,
+                        _limit: 10,
+                    }
+                };
+                this.$http.get('https://jsonplaceholder.typicode.com/posts', options).then(response => {
+                    localStorage.setItem('list', JSON.stringify(response.data));
+                }, error => console.log(error));
+            }
         },
     },
     created() {
